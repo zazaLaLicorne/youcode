@@ -1,18 +1,23 @@
-import { createEnv } from "@t3-oss/env-next";
-import { z } from "zod";
- 
+import { createEnv } from '@t3-oss/env-nextjs';
+import { z } from 'zod';
+
 export const env = createEnv({
   server: {
     DATABASE_URL: z.string().url(),
-    // GITHUB_ID: z.string().min(1),
-    // GITHUB_SECRET: z.string().min(1),
+    GITHUB_ID: z.string().min(1),
+    GITHUB_SECRET: z.string().min(1),
   },
-  client: {
-    // Nothing here yet
+  client: {},
+  experimental__runtimeEnv: {},
+
+   runtimeEnv: {
+    GITHUB_ID: process.env.GITHUB_ID,
+    GITHUB_SECRET: process.env.GITHUB_SECRET,
+    DATABASE_URL: process.env.DATABASE_URL,
   },
-  // Maybe you can use just `runtimeEnv` if there is a MAJ. 
-  // Please follow the docs : https://env.t3.gg/docs/nextjs#create-your-schema
-  experimental__runtimeEnv: {
-    // Nothing here yet, we just need to put client env here
+  onValidationError: (error) => {
+    console.error("❌ Erreur de validation des variables d'environnement");
+    console.error(error); // Ajoute ça pour plus de détails
+    throw new Error("Échec de validation des variables d'environnement");
   },
 });
