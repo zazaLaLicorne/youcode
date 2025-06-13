@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Typography } from '../ui/Typography';
 
+
 export const Footer = () => {
   return (
     <footer className="w-full border-t border-card">
@@ -15,6 +16,7 @@ export const Footer = () => {
               height={30}
               alt="app logo"
             />
+             <Image src="/images/logo.svg" width={40} height={30} alt="app logo" />
             <Typography variant="base" as={Link} href="/">
               {SiteConfig.title}
             </Typography>

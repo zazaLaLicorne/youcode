@@ -11,6 +11,7 @@ export const prisma: PrismaClient =
       process.env.NODE_ENV === 'development'
         ? ['query', 'error', 'warn']
         : ['error'],
+     
   });
 
 if (process.env.NODE_ENV !== 'production') {
